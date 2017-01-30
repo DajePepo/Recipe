@@ -10,14 +10,14 @@ import Foundation
 
 public class RecipeDataManager {
     
-    static func retrieveRecipes() -> [Recipe]? {
+    static func retrieveRecipes() -> [Recipe] {
         
-        var recipes: [Recipe]?
+        var recipes = [Recipe]()
         
         // Try to get json file url
         guard let url = Bundle.main.url(forResource: "recipes", withExtension: "json") else {
             print("Error getting json file url")
-            return nil
+            return []
         }
         
         do {
@@ -26,8 +26,6 @@ public class RecipeDataManager {
             let data = try Data(contentsOf: url)
             
             if let recipesJson = try JSONSerialization.jsonObject(with: data) as? [[String: Any]] {
-                
-                recipes = [Recipe]()
                 
                 // Get recipes stored in json file
                 for recipeJson in recipesJson {
@@ -46,7 +44,7 @@ public class RecipeDataManager {
                         let recipe = Recipe(id: id, name: name, headLine: headLine, imageUrl: imageUrl, ingredients: ingredients, description: description, rating: rating, difficulty: difficulty, time: time)
                         
                         // Add recipe to the result list
-                        recipes?.append(recipe)
+                        recipes.append(recipe)
                     }
                 }
             }
@@ -59,19 +57,19 @@ public class RecipeDataManager {
         return recipes
     }
     
-    static func loveRecipe(recipeId: String, succes: () -> Void, fail: () -> Void) {
-        fail()
+    static func loveRecipe(recipeId: String, value: Bool, success: () -> Void, fail: () -> Void) {
+        success()
     }
     
-    static func rateRecipe(recipeId: String, succes: () -> Void, fail: () -> Void) {
-        fail()
+    static func rateRecipe(recipeId: String, value: Int, completion: (Bool) -> Void) {
+        completion(false)
     }
     
-    static func recipeIsLoved(byUser userEmail: String, succes: (Bool) -> Void, fail: () -> Void) {
-        fail()
+    static func recipeIsLoved(recipeId: String, byUser userId: String, completion: (Bool?) -> Void) {
+        completion(Utils.randomBool())
     }
     
-    static func retrieveRate(ofUser userEmail: String, forRecipe recipeId: String, succes: (Int) -> Void, fail: () -> Void) {
+    static func retrieveRate(ofUser userId: String, forRecipe recipeId: String, success: (Int) -> Void, fail: () -> Void) {
         
     }
     

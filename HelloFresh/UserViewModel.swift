@@ -6,11 +6,14 @@
 //  Copyright © 2017 Tecnojam. All rights reserved.
 //
 
-public struct UserViewModel {
+class UserViewModel {
     
-    var userName: String
+    var id: String
     var email: String
     var password: String?
-    var token: String
-
+    
+    init(id: String, email: String) {
+        self.id = id
+        self.email = email
+    }
 }
