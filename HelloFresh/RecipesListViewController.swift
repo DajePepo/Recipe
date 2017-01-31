@@ -58,8 +58,6 @@ class RecipesListViewController: UIViewController {
             overviewVC.selectedRecipeIndex = recipesTableView.indexPathForSelectedRow?.row
         }
     }
-
-
 }
 
 
@@ -85,8 +83,22 @@ extension RecipesListViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecipesTableViewCell", for: indexPath) as? RecipesTableViewCell
         guard let recipeCell = cell else { return UITableViewCell() }
-        recipeCell.configure(model: recipesListViewModel.recipeViewModel(at: (indexPath as NSIndexPath).row))
+        recipeCell.configure(viewModel: recipesListViewModel.recipeViewModel(at: (indexPath as NSIndexPath).row))
+        recipeCell.delegate = self
         return recipeCell
+    }
+}
+
+
+// MARK: - Recipes table cell delegate
+
+extension RecipesListViewController: RecipesTableCellDelegate {
+    
+    func showLoginView() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+            present(loginViewController, animated: true, completion: nil)
+        }
     }
 }
 

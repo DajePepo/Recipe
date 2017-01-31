@@ -31,10 +31,26 @@ class OverviewViewController: UIViewController {
                     overviewTVC.tableView.estimatedRowHeight = 100
                     
                     // Configure the view controller with view model data
-                    overviewTVC.configure(model: recipeMVC.recipeViewModel(at: index))
+                    overviewTVC.configure(viewModel: recipeMVC.recipeViewModel(at: index))
+                    
+                    // Set the delegate
+                    overviewTVC.delegate = self
                 }
             }
         }
     }
     
+}
+
+
+// MARK: - Overview table cell delegate
+
+extension OverviewViewController: OverviewTableDelegate {
+    
+    func showLoginView() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+            present(loginViewController, animated: true, completion: nil)
+        }
+    }
 }

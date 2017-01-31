@@ -8,8 +8,5 @@
 
 class MyProfileViewModel: UserProtocol {
 
-    func isUserLogged() -> Bool {
-        if let _ = getUserFromUserDefaults() { return true }
-        else { return false }
-    }
+
 }

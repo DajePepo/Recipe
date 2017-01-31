@@ -9,50 +9,89 @@
 import UIKit
 
 protocol RatingDelegate {
-    func updateRating(newValue: Int, completion: (Int?) -> Void)
+    func showLoginView()
 }
 
 class RatingViewController: UIViewController {
     
     var delegate: RatingDelegate?
-    var ratingScore: Int = 0 {
-        // Every time the variable changes -> update UI
-        didSet {
-            selectButtons(rating: ratingScore)
-        }
-    }
     
     // Buttons panel view
     @IBOutlet weak var buttonsPanel: UIStackView!
     @IBOutlet weak var messageLabel: UILabel!
     
-    // Execute when one of the buttons is tapped
-    @IBAction func didClickeOnRateButton(_ sender: UIButton) {
-        
-        // Ask the delegate to update the rating (remote value)
-        delegate?.updateRating(newValue: sender.tag) { result in
-            
-            // If it worked -> update and disable the buttons panel
-            if let newValue = result {
-                ratingScore = newValue
-                messageLabel.text = "Thanks for your feedback"
-                messageLabel.isHidden = false
-            }
+    
+    func configure(viewModel: RecipeViewModel?) {
+        ratingViewModel = viewModel
+        ratingViewModel?.retriveUserRating()
+    }
+    
+    // View model
+    var ratingViewModel: RecipeViewModel? {
+        didSet {
+            bindViewModel()
         }
     }
     
-    func disableButtonsPanel() {
-        buttonsPanel.isUserInteractionEnabled = false
+    // Bind view model
+    func bindViewModel() {
+        addObserver(self, forKeyPath: #keyPath(ratingViewModel.userRating), options: .new, context: nil)
+        addObserver(self, forKeyPath: #keyPath(ratingViewModel.ratingConfirmationMessage), options: .new, context: nil)
     }
     
+    
+    // Execute when one of the buttons is tapped
+    @IBAction func didClickeOnRateButton(_ sender: UIButton) {
+        
+        // If the user is not logged -> show login form
+        if let ratingVM = ratingViewModel, !ratingVM.isUserLogged() {
+            delegate?.showLoginView()
+            return
+        }
+        
+        // Ask the delegate to update the rating
+        ratingViewModel?.rateRecipe(newValue: sender.tag)
+    }
+    
+    
+    // Override the observer to complete the binding
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == #keyPath(ratingViewModel.userRating) {
+            if let vM = ratingViewModel {
+                
+                // Select/Unselect the buttons
+                selectButtons(rating: vM.userRating)
+                
+                // Show/hide a confirmation message
+                messageLabel.isHidden = vM.userRating > 0 ? false : true
+            }
+        }
+        if keyPath == #keyPath(ratingViewModel.ratingConfirmationMessage) {
+            
+            // Update confirmation message
+            messageLabel.text = ratingViewModel?.ratingConfirmationMessage
+        }
+    }
+    
+    deinit {
+        removeObserver(self, forKeyPath: #keyPath(ratingViewModel.userRating))
+        removeObserver(self, forKeyPath: #keyPath(ratingViewModel.ratingConfirmationMessage))
+    }
+
+    
+    // Buttons methods (select, disable all)
     func selectButtons(rating: Int) {
         for view in buttonsPanel.subviews {
             if let button = view as? UIButton {
-                if button.tag <= ratingScore { button.isSelected = true }
+                if button.tag <= rating { button.isSelected = true }
                 else { button.isSelected = false }
             }
         }
         if rating > 0 { disableButtonsPanel() }
+    }
+
+    func disableButtonsPanel() {
+        buttonsPanel.isUserInteractionEnabled = false
     }
     
 }

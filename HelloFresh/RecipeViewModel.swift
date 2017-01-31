@@ -6,20 +6,26 @@
 //  Copyright © 2017 Tecnojam. All rights reserved.
 //
 
-class RecipeViewModel {
+import Foundation
+
+class RecipeViewModel: NSObject, UserProtocol {
     
     var id: String
     var name: String
     var headLine: String
     var imageUrl: String
     var ingredients: String
-    var description: String
+    var info: String
     var difficulty: String
     var time: String
     var rating: String?
     
-    private var isLoved: Bool?
-    private var userRating: Int?
+    var userRatingNotUpdated = true
+    dynamic var userRating: Int = 0
+    dynamic var ratingConfirmationMessage: String = ""
+    
+    var isLoveNotUpdated = true
+    dynamic var isLoved: Bool = false
     
 
     // Initialize the view model through the model
@@ -28,7 +34,7 @@ class RecipeViewModel {
         self.name = recipe.name
         self.headLine = recipe.headLine
         self.imageUrl = recipe.imageUrl
-        self.description = recipe.description
+        self.info = recipe.description
         self.difficulty = "level \(recipe.difficulty)"
         self.rating = (recipe.rating != nil) ? "Avarage rating is \(recipe.rating!)" : "No Rating Yet"
         self.time = {
@@ -43,54 +49,48 @@ class RecipeViewModel {
     }
     
     
-    
-    
-    // Get "isLoved" property
-    func getIsLoved(completion: (Bool?) -> Void) {
-        if let _ = isLoved {
-            completion(isLoved)
-        }
-        else {
-            RecipeDataManager.recipeIsLoved(recipeId: id, byUser: "") { result in
-                isLoved = result
-                completion(isLoved)
+    // Check if user loves the recipe
+    func retriveUserLove() {
+        if isLoveNotUpdated, let userId = getLoggedUserId() {
+            RecipeDataManager.recipeIsLoved(recipeId: id, byUser: userId) { result in
+                isLoved = result ?? false
+                isLoveNotUpdated = (result != nil) ? false : true
             }
         }
     }
     
-
-    // Set "isLoved" property
-    func setIsLoved(newValue: Bool, completion: (Bool?) -> Void) {
-        
-        // Ask data manager to update the value (remote value)
-        RecipeDataManager.loveRecipe(recipeId: id, value: newValue) { result in
-            
-            // If it worked -> set private variable
-            if result != nil { isLoved = newValue }
-            
-            // Run completion with newValue or nil (if it returned an error)
-            completion(result)
+    // Rate the recipe
+    func loveRecipe(newValue: Bool) {
+        if let userId = getLoggedUserId() {
+            RecipeDataManager.loveRecipe(recipeId: id, userId: userId, value: newValue) { result in
+                if result != nil { isLoved = newValue }
+            }
         }
     }
 
-    
-    // ...
-    func getUserRating(completion: (Int?) -> Void) {
-        if let _ = userRating {
-            completion(userRating)
-        }
-        else {
-            RecipeDataManager.retrieveRate(ofUser: "", forRecipe: id) { result in
-                userRating = result
-                completion(userRating)
+
+    // Retrieve initial user value
+    func retriveUserRating() {
+        if userRatingNotUpdated, let userId = getLoggedUserId() {
+            RecipeDataManager.retrieveRate(ofUser: userId, forRecipe: id) { result in
+                if let rating = result {
+                    userRating = rating
+                    ratingConfirmationMessage = "You have already rated this recipe"
+                    userRatingNotUpdated = false
+                }
             }
         }
     }
     
-    func rateRecipe(newValue: Int, completion: (Int?) -> Void) {
-        RecipeDataManager.rateRecipe(recipeId: id, value: newValue, userId: "") { result in
-            userRating = result
-            completion(userRating)
+    // Rate the recipe
+    func rateRecipe(newValue: Int) {
+        if let userId = getLoggedUserId() {
+            RecipeDataManager.rateRecipe(recipeId: id, value: newValue, userId: userId) { result in
+                if let rating = result {
+                    userRating = rating
+                    ratingConfirmationMessage = "Thanks for your feedback"
+                }
+            }
         }
     }
     

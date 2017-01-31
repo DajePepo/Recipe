@@ -8,8 +8,15 @@
 
 import UIKit
 
+protocol OverviewTableDelegate {
+    func showLoginView()
+}
+
 class OverviewTableViewController: UITableViewController {
 
+    // Delegate
+    var delegate: OverviewTableDelegate?
+    
     // Outlets
     @IBOutlet weak var pictureImageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -22,63 +29,70 @@ class OverviewTableViewController: UITableViewController {
     @IBOutlet weak var ratingButtonsContainer: UIView!
     @IBOutlet weak var loveButton: UIButton!
     
-    // Action
-    @IBAction func didClickOnLoveButton(_ sender: Any) {
+    
+    func configure(viewModel: RecipeViewModel) {
         
-        // Update the model view variable
-        tableModel?.setIsLoved(newValue: !loveButton.isSelected) {
-            
-            // Then the UI
-            loveButton.isSelected = $0 ?? loveButton.isSelected
+        // Set model view
+        tableViewModel = viewModel
+        
+        // Get the rating buttons panel from the sub view controllers list
+        for viewController in self.childViewControllers {
+            if let ratingVC = viewController as? RatingViewController {
+                ratingVC.configure(viewModel: tableViewModel)
+                ratingVC.delegate = self
+            }
         }
     }
-    
+
     
     // View model
-    var tableModel: RecipeViewModel? {
+    var tableViewModel: RecipeViewModel? {
         didSet {
             bindViewModel()
         }
     }
     
-    
     // Method used to bind view model properties to table view elements
     func bindViewModel() {
-        self.nameLabel.text = tableModel?.name
-        self.headLineLabel.text = tableModel?.headLine
-        self.difficultyLabel.text = tableModel?.difficulty
-        self.timeLabel.text = tableModel?.time
-        self.ingredientsLabel.text = tableModel?.ingredients
-        self.descriptionLabel.text = tableModel?.description
-        self.ratingStatusLabel.text =  tableModel?.rating
-        self.pictureImageView.downloadedFrom(link: tableModel?.imageUrl)
+        self.nameLabel.text = tableViewModel?.name
+        self.headLineLabel.text = tableViewModel?.headLine
+        self.difficultyLabel.text = tableViewModel?.difficulty
+        self.timeLabel.text = tableViewModel?.time
+        self.ingredientsLabel.text = tableViewModel?.ingredients
+        self.descriptionLabel.text = tableViewModel?.info
+        self.ratingStatusLabel.text =  tableViewModel?.rating
+        self.pictureImageView.downloadedFrom(link: tableViewModel?.imageUrl)
+        if let tableVM = tableViewModel { self.loveButton.isSelected = tableVM.isLoved }
+        addObserver(self, forKeyPath: #keyPath(tableViewModel.isLoved), options: .new, context: nil)
     }
     
-    func configure(model: RecipeViewModel) {
-
-        // Set model view
-        tableModel = model
+    
+    // Love action
+    @IBAction func didClickOnLoveButton(_ sender: Any) {
         
-        // Set love button state
-        model.getIsLoved { loveButton.isSelected = $0 ?? false }
+        // If the user is not logged -> show login form
+        if let viewModel = tableViewModel, !viewModel.isUserLogged() {
+            delegate?.showLoginView()
+            return
+        }
         
-        // Get the rating buttons panel from the sub view controllers list
-        for viewController in self.childViewControllers {
-            if let ratingVC = viewController as? RatingViewController {
-
-                // Set rating delegate
-                ratingVC.delegate = self
-
-                // Set user rating
-                model.getUserRating { result in
-                    if let value = result, value > 0 {
-                        ratingVC.ratingScore = value
-                        ratingVC.messageLabel.text = "You have already rated this recipe"
-                        ratingVC.messageLabel.isHidden = false
-                    }
-                }
+        tableViewModel?.loveRecipe(newValue: !loveButton.isSelected)
+    }
+    
+    
+    // Override the observer to complete the binding
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == #keyPath(tableViewModel.isLoved) {
+            if let tableVM = tableViewModel {
+                
+                // Set button state according to model view attribute value
+                loveButton.isSelected = tableVM.isLoved
             }
         }
+    }
+    
+    deinit {
+        removeObserver(self, forKeyPath: #keyPath(tableViewModel.isLoved))
     }
 
 }
@@ -91,7 +105,6 @@ extension OverviewTableViewController  {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
-    
 }
 
 
@@ -99,8 +112,8 @@ extension OverviewTableViewController  {
 
 extension OverviewTableViewController: RatingDelegate {
     
-    func updateRating(newValue: Int, completion: (Int?) -> Void) {
-        tableModel?.rateRecipe(newValue: newValue) { completion($0) }
+    func showLoginView() {
+        delegate?.showLoginView()
     }
 }
 

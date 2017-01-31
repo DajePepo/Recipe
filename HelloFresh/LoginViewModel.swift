@@ -37,8 +37,9 @@ class LoginViewModel: NSObject, UserProtocol {
         if let email = email, let password = password {
             let encryptedPassword = password.md5()
             UserDataManager.logIn(userEmail: email, userPassword: encryptedPassword) { result in
-                if let user = result {
-                    storeUserIntoUserDefaults(user: user)
+                if let userId = result {
+                    let loggedUser = User(id: userId, email: email, password: password)
+                    storeUserIntoUserDefaults(user: loggedUser)
                     success(true)
                 }
                 else {

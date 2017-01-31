@@ -9,11 +9,28 @@
 import Foundation
 
 protocol UserProtocol {
+    
+    func isUserLogged() -> Bool
+    func getLoggedUserId() -> String?
     func storeUserIntoUserDefaults(user: User)
     func getUserFromUserDefaults() -> User?
 }
 
 extension UserProtocol {
+    
+    func isUserLogged() -> Bool {
+        if let _ = getUserFromUserDefaults() {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
+    func getLoggedUserId() -> String? {
+        guard let user = getUserFromUserDefaults() else { return nil }
+        return user.id
+    }
     
     func storeUserIntoUserDefaults(user: User) {
         

@@ -41,11 +41,11 @@ class ProfileViewController: UIViewController {
     
     // Show and hide unlogged view
     func showUnloggedView() {
-        self.view.addSubview(unloggedViewContainer)
+        unloggedViewContainer.isHidden = false
     }
     
     func hideUnloggedView() {
-        unloggedViewContainer.removeFromSuperview()
+        unloggedViewContainer.isHidden = true
     }
 
 }

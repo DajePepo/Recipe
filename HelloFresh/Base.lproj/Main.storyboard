@@ -23,7 +23,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V1b-6G-HdI">
+                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V1b-6G-HdI">
                                 <rect key="frame" x="0.0" y="64" width="414" height="623"/>
                                 <connections>
                                     <segue destination="Bj3-Pv-cJI" kind="embed" id="cjO-di-dl5"/>
@@ -37,11 +37,6 @@
                             <constraint firstItem="V1b-6G-HdI" firstAttribute="leading" secondItem="WB9-SM-BGL" secondAttribute="leading" id="eYX-tI-6mA"/>
                             <constraint firstItem="V1b-6G-HdI" firstAttribute="bottom" secondItem="wWb-3c-UEx" secondAttribute="top" id="iDu-Ll-yEf"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="V1b-6G-HdI"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="My Profile" id="dBb-zs-myD"/>
                     <connections>
@@ -56,7 +51,7 @@
         <!--Login View Controller-->
         <scene sceneID="6lM-sO-CW9">
             <objects>
-                <viewController id="QRV-FM-cXk" customClass="LoginViewController" customModule="HelloFresh" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="QRV-FM-cXk" customClass="LoginViewController" customModule="HelloFresh" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OBa-vB-PNk"/>
                         <viewControllerLayoutGuide type="bottom" id="DIu-io-ygn"/>
@@ -183,24 +178,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yHJ-QH-nTf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3100" y="929"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="6Ws-3X-7T5">
-            <objects>
-                <viewController id="K0a-sE-Mr7" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="91n-4m-uQr"/>
-                        <viewControllerLayoutGuide type="bottom" id="3u8-Rq-gk8"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="YZ5-iW-MCT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wjR-eY-Twi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4103" y="929"/>
         </scene>
         <!--Recipes-->
         <scene sceneID="xu0-tE-1bZ">

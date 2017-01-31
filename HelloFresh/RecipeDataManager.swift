@@ -57,7 +57,7 @@ public class RecipeDataManager {
         return recipes
     }
     
-    static func loveRecipe(recipeId: String, value: Bool, completion: (Bool?) -> Void) {
+    static func loveRecipe(recipeId: String, userId: String, value: Bool, completion: (Bool?) -> Void) {
         completion(true)
     }
     
