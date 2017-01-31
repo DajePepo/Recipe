@@ -6,7 +6,6 @@
 //  Copyright © 2017 Tecnojam. All rights reserved.
 //
 
-
 class RecipeViewModel {
     
     var id: String
@@ -20,7 +19,7 @@ class RecipeViewModel {
     var rating: String?
     
     private var isLoved: Bool?
-    var userRating: String?
+    private var userRating: Int?
     
 
     // Initialize the view model through the model
@@ -43,10 +42,13 @@ class RecipeViewModel {
         }()
     }
     
+    
+    
+    
     // Get "isLoved" property
     func getIsLoved(completion: (Bool?) -> Void) {
         if let _ = isLoved {
-            return completion(isLoved)
+            completion(isLoved)
         }
         else {
             RecipeDataManager.recipeIsLoved(recipeId: id, byUser: "") { result in
@@ -58,27 +60,38 @@ class RecipeViewModel {
     
 
     // Set "isLoved" property
-     func setIsLoved(newValue: Bool, completion: (Bool?) -> Void) {
+    func setIsLoved(newValue: Bool, completion: (Bool?) -> Void) {
         
         // Ask data manager to update the value (remote value)
-        RecipeDataManager.loveRecipe(recipeId: id, value: newValue, success: {
+        RecipeDataManager.loveRecipe(recipeId: id, value: newValue) { result in
             
-            // If it worked -> set private variable and run completion with newValue
-            isLoved = newValue
-            completion(newValue)
-        }, fail: {
+            // If it worked -> set private variable
+            if result != nil { isLoved = newValue }
             
-            // If no -> run completion with nil value and print the error
-            completion(nil)
-            print("Error loving the recipe")
-        })
+            // Run completion with newValue or nil (if it returned an error)
+            completion(result)
+        }
     }
 
-}
-
-
-extension RecipeViewModel: RatingDelegate {
-    func updateRating(newValue: Int, success: (Int?) -> Void) {
-        success(newValue)
+    
+    // ...
+    func getUserRating(completion: (Int?) -> Void) {
+        if let _ = userRating {
+            completion(userRating)
+        }
+        else {
+            RecipeDataManager.retrieveRate(ofUser: "", forRecipe: id) { result in
+                userRating = result
+                completion(userRating)
+            }
+        }
     }
+    
+    func rateRecipe(newValue: Int, completion: (Int?) -> Void) {
+        RecipeDataManager.rateRecipe(recipeId: id, value: newValue, userId: "") { result in
+            userRating = result
+            completion(userRating)
+        }
+    }
+    
 }

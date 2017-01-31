@@ -51,9 +51,7 @@ class OverviewTableViewController: UITableViewController {
         self.ingredientsLabel.text = tableModel?.ingredients
         self.descriptionLabel.text = tableModel?.description
         self.ratingStatusLabel.text =  tableModel?.rating
-        
-        //self.pictureImageView = tableModel?.imageUrl
-        self.pictureImageView.image = UIImage(named: "imagePlaceholder")
+        self.pictureImageView.downloadedFrom(link: tableModel?.imageUrl)
     }
     
     func configure(model: RecipeViewModel) {
@@ -63,19 +61,24 @@ class OverviewTableViewController: UITableViewController {
         
         // Set love button state
         model.getIsLoved { loveButton.isSelected = $0 ?? false }
-
+        
         // Get the rating buttons panel from the sub view controllers list
         for viewController in self.childViewControllers {
             if let ratingVC = viewController as? RatingViewController {
 
                 // Set rating delegate
-                ratingVC.delegate = tableModel
+                ratingVC.delegate = self
 
-                // Set initial rating
-                ratingVC.ratingScore = 3
+                // Set user rating
+                model.getUserRating { result in
+                    if let value = result, value > 0 {
+                        ratingVC.ratingScore = value
+                        ratingVC.messageLabel.text = "You have already rated this recipe"
+                        ratingVC.messageLabel.isHidden = false
+                    }
+                }
             }
         }
-
     }
 
 }
@@ -90,3 +93,14 @@ extension OverviewTableViewController  {
     }
     
 }
+
+
+// MARK: - Rating delegate
+
+extension OverviewTableViewController: RatingDelegate {
+    
+    func updateRating(newValue: Int, completion: (Int?) -> Void) {
+        tableModel?.rateRecipe(newValue: newValue) { completion($0) }
+    }
+}
+

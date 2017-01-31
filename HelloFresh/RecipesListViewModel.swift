@@ -6,7 +6,7 @@
 //  Copyright © 2017 Tecnojam. All rights reserved.
 //
 
-class RecipeViewModelController {
+class RecipesListViewModel {
     
     fileprivate var recipeViewModelList = [RecipeViewModel]()
     
@@ -26,6 +26,4 @@ class RecipeViewModelController {
         self.recipeViewModelList = recipes.map(){ RecipeViewModel(recipe: $0) }
     }
 
-    // Check
-    
 }

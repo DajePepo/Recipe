@@ -12,13 +12,13 @@ class OverviewViewController: UIViewController {
 
     // Variables
     var selectedRecipeIndex: Int?
-    var recipeViewModelController: RecipeViewModelController?
+    var recipesListViewModel: RecipesListViewModel?
     
     // Life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let index = selectedRecipeIndex, let recipeMVC = recipeViewModelController {
+        if let index = selectedRecipeIndex, let recipeMVC = recipesListViewModel {
             
             // Get the overview table from the sub view controllers list
             for viewController in self.childViewControllers {

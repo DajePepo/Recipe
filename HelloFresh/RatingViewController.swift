@@ -9,7 +9,7 @@
 import UIKit
 
 protocol RatingDelegate {
-    func updateRating(newValue: Int, success: (Int?) -> Void)
+    func updateRating(newValue: Int, completion: (Int?) -> Void)
 }
 
 class RatingViewController: UIViewController {
@@ -18,17 +18,13 @@ class RatingViewController: UIViewController {
     var ratingScore: Int = 0 {
         // Every time the variable changes -> update UI
         didSet {
-            for view in buttonsPanel.subviews {
-                if let button = view as? UIButton {
-                    if button.tag <= ratingScore { button.isSelected = true }
-                    else { button.isSelected = false }
-                }
-            }
+            selectButtons(rating: ratingScore)
         }
     }
     
     // Buttons panel view
     @IBOutlet weak var buttonsPanel: UIStackView!
+    @IBOutlet weak var messageLabel: UILabel!
     
     // Execute when one of the buttons is tapped
     @IBAction func didClickeOnRateButton(_ sender: UIButton) {
@@ -36,19 +32,27 @@ class RatingViewController: UIViewController {
         // Ask the delegate to update the rating (remote value)
         delegate?.updateRating(newValue: sender.tag) { result in
             
-            // If it worked -> update the local value
+            // If it worked -> update and disable the buttons panel
             if let newValue = result {
                 ratingScore = newValue
+                messageLabel.text = "Thanks for your feedback"
+                messageLabel.isHidden = false
             }
         }
     }
     
-    func disableButtons() {
+    func disableButtonsPanel() {
+        buttonsPanel.isUserInteractionEnabled = false
+    }
+    
+    func selectButtons(rating: Int) {
         for view in buttonsPanel.subviews {
             if let button = view as? UIButton {
-                button.isEnabled = false
+                if button.tag <= ratingScore { button.isSelected = true }
+                else { button.isSelected = false }
             }
         }
+        if rating > 0 { disableButtonsPanel() }
     }
     
 }

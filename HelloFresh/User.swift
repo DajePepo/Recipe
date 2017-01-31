@@ -6,17 +6,18 @@
 //  Copyright © 2017 Tecnojam. All rights reserved.
 //
 
+import Foundation
+
 public class User {
 
-    var userName: String
+    var id: String
     var email: String
     var password: String?
-    var token: String
     
-    init(userName: String, email: String, token: String) {
-        self.userName = userName
+    init(id: String, email: String, password: String? = nil) {
+        self.id = id
         self.email = email
-        self.token = token
+        self.password = password
     }
-
+    
 }

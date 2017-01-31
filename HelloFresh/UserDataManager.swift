@@ -10,8 +10,8 @@ import Foundation
 
 public class UserDataManager {
 
-    static func logIn(userEmail: String, userPassword: String, succes: (String) -> Void, fail: () -> Void) {
-        
+    static func logIn(userEmail: String, userPassword: String, completion: (User?) -> Void) {
+        completion(User(id: "", email: ""))
     }
     
     static func signUp(userEmail: String, userPassword: String, succes: (String) -> Void, fail: () -> Void) {

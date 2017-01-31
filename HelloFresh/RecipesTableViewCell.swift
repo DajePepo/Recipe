@@ -34,8 +34,7 @@ class RecipesTableViewCell: UITableViewCell {
         self.nameLabel.text = cellModel?.name
         self.headLineLabel.text = cellModel?.headLine
         self.difficultyLabel.text = cellModel?.difficulty
-        //self.pictureImageView = cellModel?.imageUrl
-        self.pictureImageView.image = UIImage(named: "imagePlaceholder")
+        self.pictureImageView.downloadedFrom(link: cellModel?.imageUrl)
     }
 
     func configure(model: RecipeViewModel) {

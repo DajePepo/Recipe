@@ -57,20 +57,20 @@ public class RecipeDataManager {
         return recipes
     }
     
-    static func loveRecipe(recipeId: String, value: Bool, success: () -> Void, fail: () -> Void) {
-        success()
+    static func loveRecipe(recipeId: String, value: Bool, completion: (Bool?) -> Void) {
+        completion(true)
     }
     
-    static func rateRecipe(recipeId: String, value: Int, completion: (Bool) -> Void) {
-        completion(false)
+    static func rateRecipe(recipeId: String, value: Int, userId: String, completion: (Int?) -> Void) {
+        completion(2)
     }
     
     static func recipeIsLoved(recipeId: String, byUser userId: String, completion: (Bool?) -> Void) {
         completion(Utils.randomBool())
     }
     
-    static func retrieveRate(ofUser userId: String, forRecipe recipeId: String, success: (Int) -> Void, fail: () -> Void) {
-        
+    static func retrieveRate(ofUser userId: String, forRecipe recipeId: String, completion: (Int?) -> Void) {
+        completion(0)
     }
     
 }

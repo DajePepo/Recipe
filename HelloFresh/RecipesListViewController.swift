@@ -11,7 +11,7 @@ import UIKit
 class RecipesListViewController: UIViewController {
     
     // Variables
-    var recipeViewModelController = RecipeViewModelController()
+    var recipesListViewModel = RecipesListViewModel()
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh(refreshControl:)), for: .valueChanged)
@@ -33,7 +33,7 @@ class RecipesListViewController: UIViewController {
         recipesTableView.addSubview(self.refreshControl)
 
         // Get recipes list
-        recipeViewModelController.retrieveRecipes()
+        recipesListViewModel.retrieveRecipes()
         
     }
     
@@ -43,7 +43,7 @@ class RecipesListViewController: UIViewController {
     
     // Refresh table data
     func handleRefresh(refreshControl: UIRefreshControl) {
-        recipeViewModelController.retrieveRecipes()
+        recipesListViewModel.retrieveRecipes()
         recipesTableView.reloadData()
         refreshControl.endRefreshing()
     }
@@ -54,7 +54,7 @@ class RecipesListViewController: UIViewController {
         if let overviewVC = segue.destination as? OverviewViewController {
             
             // Set view model controller and selected recipe index in the overview view controller
-            overviewVC.recipeViewModelController = recipeViewModelController
+            overviewVC.recipesListViewModel = recipesListViewModel
             overviewVC.selectedRecipeIndex = recipesTableView.indexPathForSelectedRow?.row
         }
     }
@@ -78,14 +78,14 @@ extension RecipesListViewController: UITableViewDelegate {
 extension RecipesListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipeViewModelController.recipesCount
+        return recipesListViewModel.recipesCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecipesTableViewCell", for: indexPath) as? RecipesTableViewCell
         guard let recipeCell = cell else { return UITableViewCell() }
-        recipeCell.configure(model: recipeViewModelController.recipeViewModel(at: (indexPath as NSIndexPath).row))
+        recipeCell.configure(model: recipesListViewModel.recipeViewModel(at: (indexPath as NSIndexPath).row))
         return recipeCell
     }
 }
