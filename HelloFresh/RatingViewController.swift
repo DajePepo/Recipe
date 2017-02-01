@@ -19,7 +19,7 @@ class RatingViewController: UIViewController {
     
     // Outlets
     @IBOutlet weak var buttonsPanel: UIStackView! // Buttons panel
-    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var removeUserRating: UIButton!
     
     // Configure method -> it's called as first to initialize the view controller
     func configure(viewModel: RecipeViewModel?) {
@@ -37,11 +37,10 @@ class RatingViewController: UIViewController {
     // Bind view model
     func bindViewModel() {
         addObserver(self, forKeyPath: #keyPath(ratingViewModel.userRating), options: .new, context: nil)
-        addObserver(self, forKeyPath: #keyPath(ratingViewModel.ratingConfirmationMessage), options: .new, context: nil)
     }
     
     // Execute when one of the buttons is tapped
-    @IBAction func didClickeOnRateButton(_ sender: UIButton) {
+    @IBAction func didClickOnRateButton(_ sender: UIButton) {
         
         // If the user is not logged -> show login form
         if let ratingVM = ratingViewModel, !ratingVM.defaultsManager.isUserLogged() {
@@ -57,6 +56,18 @@ class RatingViewController: UIViewController {
         })
     }
     
+    @IBAction func didClickOnRemoveRatingButton(_ sender: Any) {
+        
+        // Ask the delegate to update the rating to zero (no value)
+        ratingViewModel?.rateRecipe(newValue: 0,
+            success:{ [unowned self] _ in
+                self.showMessage(message: "Feedback removed correctly.", completionHandler: nil)
+            },
+            fail: { [unowned self] _ in
+                self.showMessage(message: "There was an error.\nPlease try again.", completionHandler: nil)
+            })
+    }
+    
     // Override the observer to complete the binding
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == #keyPath(ratingViewModel.userRating) {
@@ -66,19 +77,13 @@ class RatingViewController: UIViewController {
                 selectButtons(rating: vM.userRating)
                 
                 // Show/hide a confirmation message
-                messageLabel.isHidden = vM.userRating > 0 ? false : true
+                removeUserRating.isHidden = vM.userRating > 0 ? false : true
             }
-        }
-        if keyPath == #keyPath(ratingViewModel.ratingConfirmationMessage) {
-            
-            // Update confirmation message
-            messageLabel.text = ratingViewModel?.ratingConfirmationMessage
         }
     }
     
     deinit {
         removeObserver(self, forKeyPath: #keyPath(ratingViewModel.userRating))
-        removeObserver(self, forKeyPath: #keyPath(ratingViewModel.ratingConfirmationMessage))
     }
 
     // Buttons methods (select, disable all)
@@ -90,10 +95,15 @@ class RatingViewController: UIViewController {
             }
         }
         if rating > 0 { disableButtonsPanel() }
+        else { enableButtonsPanel() }
     }
 
     func disableButtonsPanel() {
         buttonsPanel.isUserInteractionEnabled = false
     }
-    
+
+    func enableButtonsPanel() {
+        buttonsPanel.isUserInteractionEnabled = true
+    }
+
 }

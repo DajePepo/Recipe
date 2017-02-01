@@ -783,7 +783,7 @@
                                         <state key="normal" image="rateButtonGray"/>
                                         <state key="selected" image="rateButtonGreen"/>
                                         <connections>
-                                            <action selector="didClickeOnRateButton:" destination="DxU-2H-BA4" eventType="touchUpInside" id="lHa-2d-eFf"/>
+                                            <action selector="didClickOnRateButton:" destination="DxU-2H-BA4" eventType="touchUpInside" id="8p1-EG-Dsz"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YJy-Vi-GVV">
@@ -791,7 +791,7 @@
                                         <state key="normal" image="rateButtonGray"/>
                                         <state key="selected" image="rateButtonGreen"/>
                                         <connections>
-                                            <action selector="didClickeOnRateButton:" destination="DxU-2H-BA4" eventType="touchUpInside" id="blc-Xu-jBC"/>
+                                            <action selector="didClickOnRateButton:" destination="DxU-2H-BA4" eventType="touchUpInside" id="VT6-Rd-F5H"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MCE-yy-n6c">
@@ -799,7 +799,7 @@
                                         <state key="normal" image="rateButtonGray"/>
                                         <state key="selected" image="rateButtonGreen"/>
                                         <connections>
-                                            <action selector="didClickeOnRateButton:" destination="DxU-2H-BA4" eventType="touchUpInside" id="tot-0F-VCN"/>
+                                            <action selector="didClickOnRateButton:" destination="DxU-2H-BA4" eventType="touchUpInside" id="Zcd-ZM-W1F"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qle-Sf-wDg">
@@ -807,29 +807,33 @@
                                         <state key="normal" image="rateButtonGray"/>
                                         <state key="selected" image="rateButtonGreen"/>
                                         <connections>
-                                            <action selector="didClickeOnRateButton:" destination="DxU-2H-BA4" eventType="touchUpInside" id="9Fa-7b-WYc"/>
+                                            <action selector="didClickOnRateButton:" destination="DxU-2H-BA4" eventType="touchUpInside" id="zU1-7a-N6W"/>
                                         </connections>
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyR-xf-hI1">
-                                <rect key="frame" x="180.66666666666663" y="71" width="37.333333333333343" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SZW-xa-zFw">
+                                <rect key="frame" x="125.33333333333331" y="66" width="148" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="Remove your feedback">
+                                    <color key="titleColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="didClickOnRemoveRatingButton:" destination="DxU-2H-BA4" eventType="touchUpInside" id="RKH-cV-ZRN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="cyR-xf-hI1" firstAttribute="centerX" secondItem="Oyz-S3-yJ4" secondAttribute="centerX" id="9h4-PX-SCG"/>
+                            <constraint firstItem="SZW-xa-zFw" firstAttribute="top" secondItem="Oyz-S3-yJ4" secondAttribute="bottom" constant="5" id="2ff-7Q-S6j"/>
                             <constraint firstItem="Oyz-S3-yJ4" firstAttribute="centerY" secondItem="uTB-Af-11F" secondAttribute="centerY" id="Eez-79-1Rs"/>
                             <constraint firstItem="Oyz-S3-yJ4" firstAttribute="centerX" secondItem="uTB-Af-11F" secondAttribute="centerX" id="UZa-Ro-ib9"/>
-                            <constraint firstItem="cyR-xf-hI1" firstAttribute="top" secondItem="Oyz-S3-yJ4" secondAttribute="bottom" constant="10" id="aO7-mM-IeJ"/>
+                            <constraint firstItem="SZW-xa-zFw" firstAttribute="centerX" secondItem="uTB-Af-11F" secondAttribute="centerX" id="gYQ-UI-GIN"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="buttonsPanel" destination="Oyz-S3-yJ4" id="PiN-2d-DzQ"/>
-                        <outlet property="messageLabel" destination="cyR-xf-hI1" id="11Q-xw-po6"/>
+                        <outlet property="buttonsPanel" destination="Oyz-S3-yJ4" id="w9X-Hn-IeW"/>
+                        <outlet property="removeUserRating" destination="SZW-xa-zFw" id="v5U-5Q-Qh5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NJC-9p-Vl6" userLabel="First Responder" sceneMemberID="firstResponder"/>

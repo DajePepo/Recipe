@@ -22,7 +22,6 @@ class RecipeViewModel: NSObject {
     var rating: String?
     var userRatingNotUpdated = true
     dynamic var userRating: Int = 0
-    dynamic var ratingConfirmationMessage: String = ""
     var isLoveNotUpdated = true
     dynamic var isLoved: Bool = false
     var recipeDataManager = RecipeDataManager()
@@ -80,7 +79,6 @@ class RecipeViewModel: NSObject {
             recipeDataManager.retrieveRate(ofUser: userId, forRecipe: id) { (result, error) in
                 if let rating = result {
                     userRating = rating
-                    ratingConfirmationMessage = "You have already rated this recipe"
                     userRatingNotUpdated = false
                 }
                 completion?()
@@ -95,7 +93,6 @@ class RecipeViewModel: NSObject {
             recipeDataManager.rateRecipe(recipeId: id, value: newValue, userId: userId) { (result, error) in
                 if let rating = result {
                     userRating = rating
-                    ratingConfirmationMessage = "Thanks for your feedback"
                     success?()
                 }
                 else { fail?() }

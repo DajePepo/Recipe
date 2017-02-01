@@ -12,7 +12,7 @@ extension UIImageView {
     
     func downloadedFrom(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit) {
         contentMode = mode
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
+        URLSession.shared.dataTask(with: url) { [unowned self] (data, response, error) in
             guard   let httpURLResponse = response as? HTTPURLResponse,
                     httpURLResponse.statusCode == 200,
                     let mimeType = response?.mimeType,
