@@ -10,6 +10,7 @@ import UIKit
 
 protocol RecipesTableCellDelegate {
     func showLoginView()
+    func showErrorMessage(message: String)
 }
 
 class RecipesTableViewCell: UITableViewCell {
@@ -29,12 +30,12 @@ class RecipesTableViewCell: UITableViewCell {
         }
     }
     
+    // Configure method -> it's called as first to initialize the cell
     func configure(viewModel: RecipeViewModel) {
         cellViewModel = viewModel
         cellViewModel?.retriveUserLove()
     }
 
-    
     // View model
     var cellViewModel: RecipeViewModel? {
         didSet {
@@ -52,17 +53,20 @@ class RecipesTableViewCell: UITableViewCell {
         addObserver(self, forKeyPath: #keyPath(cellViewModel.isLoved), options: .new, context: nil)
     }
     
-    
     // Love button action
     @IBAction func didClickOnLoveButton(_ sender: AnyObject) {
         
         // If the user is not logged -> show login form
-        if let cellVM = cellViewModel, !cellVM.isUserLogged() {
+        if let cellVM = cellViewModel, !cellVM.defaultsManager.isUserLogged() {
             delegate?.showLoginView()
             return
         }
         
-        cellViewModel?.loveRecipe(newValue: !loveButton.isSelected)
+        cellViewModel?.loveRecipe(newValue: !loveButton.isSelected, fail: { [unowned self] _ in
+            
+            // If the action failed
+            self.delegate?.showErrorMessage(message: "There was an error.\nPlease try again.")
+        })
     }
     
     // Override the observer to complete the binding

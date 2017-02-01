@@ -14,8 +14,10 @@ protocol UnloggedDelegate {
 
 class UnloggedViewController: UIViewController {
     
+    // Variables
     var delegate: UnloggedDelegate?
 
+    // Outlets
     @IBOutlet weak var loginButton: UIButton! {
         didSet {
             loginButton.layer.borderWidth = 1
@@ -23,6 +25,7 @@ class UnloggedViewController: UIViewController {
         }
     }
     
+    // Actions
     @IBAction func didClickOnLoginButton(_ sender: Any) {        
         delegate?.goToLoginViewController()
     }

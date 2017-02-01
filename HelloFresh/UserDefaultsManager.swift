@@ -1,53 +1,43 @@
 //
-//  UserProtocol.swift
+//  UserDefaultsManager.swift
 //  HelloFresh
 //
-//  Created by Pietro Santececca on 31/01/17.
+//  Created by Pietro Santececca on 01/02/17.
 //  Copyright © 2017 Tecnojam. All rights reserved.
 //
 
+
 import Foundation
 
-protocol UserProtocol {
-    
-    func isUserLogged() -> Bool
-    func getLoggedUserId() -> String?
-    func storeUserIntoUserDefaults(user: User)
-    func getUserFromUserDefaults() -> User?
-}
-
-extension UserProtocol {
+class UserDefaultsManager {
     
     func isUserLogged() -> Bool {
+        if Constants.userWillBeLogged { return true }
         if let _ = getUserFromUserDefaults() {
             return true
         }
-        else {
-            return false
-        }
+        else { return false }
     }
     
     func getLoggedUserId() -> String? {
+        if Constants.userWillBeLogged, let userId = Constants.fakeUserId { return userId }
         guard let user = getUserFromUserDefaults() else { return nil }
         return user.id
     }
     
     func storeUserIntoUserDefaults(user: User) {
         
-        var userDictionary = [[String: String]]()
+        var userDictionary = [String: String]()
         
         // Id
-        let idDict = ["id": user.id]
-        userDictionary.append(idDict)
+        userDictionary["id"] = user.id
         
         // Email
-        let emailDict = ["email": user.email]
-        userDictionary.append(emailDict)
+        userDictionary["email"] = user.email
         
         // Password
         if let password = user.password {
-            let passwordDict = ["password": password]
-            userDictionary.append(passwordDict)
+            userDictionary["password"] = password
         }
         
         let defaults = UserDefaults.standard
@@ -68,4 +58,5 @@ extension UserProtocol {
         }
         return nil
     }
+    
 }

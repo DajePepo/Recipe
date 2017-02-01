@@ -6,7 +6,7 @@
 //  Copyright © 2017 Tecnojam. All rights reserved.
 //
 
-class MyProfileViewModel: UserProtocol {
+class MyProfileViewModel {
 
-
+    var defaultsManager = UserDefaultsManager()
 }

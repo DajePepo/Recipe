@@ -14,13 +14,14 @@ protocol RatingDelegate {
 
 class RatingViewController: UIViewController {
     
+    // Variables
     var delegate: RatingDelegate?
     
-    // Buttons panel view
-    @IBOutlet weak var buttonsPanel: UIStackView!
+    // Outlets
+    @IBOutlet weak var buttonsPanel: UIStackView! // Buttons panel
     @IBOutlet weak var messageLabel: UILabel!
     
-    
+    // Configure method -> it's called as first to initialize the view controller
     func configure(viewModel: RecipeViewModel?) {
         ratingViewModel = viewModel
         ratingViewModel?.retriveUserRating()
@@ -39,20 +40,22 @@ class RatingViewController: UIViewController {
         addObserver(self, forKeyPath: #keyPath(ratingViewModel.ratingConfirmationMessage), options: .new, context: nil)
     }
     
-    
     // Execute when one of the buttons is tapped
     @IBAction func didClickeOnRateButton(_ sender: UIButton) {
         
         // If the user is not logged -> show login form
-        if let ratingVM = ratingViewModel, !ratingVM.isUserLogged() {
+        if let ratingVM = ratingViewModel, !ratingVM.defaultsManager.isUserLogged() {
             delegate?.showLoginView()
             return
         }
         
         // Ask the delegate to update the rating
-        ratingViewModel?.rateRecipe(newValue: sender.tag)
+        ratingViewModel?.rateRecipe(newValue: sender.tag, fail: { [unowned self] _ in
+            
+            // If the action fail
+            self.showMessage(message: "There was an error.\nPlease try again.", completionHandler: nil)
+        })
     }
-    
     
     // Override the observer to complete the binding
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -78,7 +81,6 @@ class RatingViewController: UIViewController {
         removeObserver(self, forKeyPath: #keyPath(ratingViewModel.ratingConfirmationMessage))
     }
 
-    
     // Buttons methods (select, disable all)
     func selectButtons(rating: Int) {
         for view in buttonsPanel.subviews {

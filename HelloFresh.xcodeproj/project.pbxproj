@@ -9,18 +9,23 @@
 /* Begin PBXBuildFile section */
 		370658A713321703C989BA8A /* Pods_HelloFreshUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9902D0CE8CD403065E81C44 /* Pods_HelloFreshUITests.framework */; };
 		9157FF271B5511D4735980C5 /* Pods_HelloFresh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 252B8333A327D061808BD7E3 /* Pods_HelloFresh.framework */; };
-		9A180E3C1E40F9160097F127 /* UserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A180E3B1E40F9160097F127 /* UserProtocol.swift */; };
-		9A180E3D1E40FA110097F127 /* UserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A180E3B1E40F9160097F127 /* UserProtocol.swift */; };
-		9A180E3E1E40FA120097F127 /* UserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A180E3B1E40F9160097F127 /* UserProtocol.swift */; };
 		9A180E401E40FA5A0097F127 /* MyProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A180E3F1E40FA5A0097F127 /* MyProfileViewModel.swift */; };
 		9A180E411E40FB410097F127 /* MyProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A180E3F1E40FA5A0097F127 /* MyProfileViewModel.swift */; };
 		9A180E421E40FB410097F127 /* MyProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A180E3F1E40FA5A0097F127 /* MyProfileViewModel.swift */; };
+		9A180E441E412A1D0097F127 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A180E431E412A1D0097F127 /* Constants.swift */; };
+		9A180E451E412D1D0097F127 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A180E431E412A1D0097F127 /* Constants.swift */; };
+		9A180E461E412D1E0097F127 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A180E431E412A1D0097F127 /* Constants.swift */; };
+		9A180E481E41E8AF0097F127 /* RecipeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A180E471E41E8AF0097F127 /* RecipeViewModelTests.swift */; };
+		9A180E4A1E41F6DF0097F127 /* RecipeDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A180E491E41F6DF0097F127 /* RecipeDataManagerTests.swift */; };
+		9A6054351E422C2D00B87D9C /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6054341E422C2D00B87D9C /* LoginViewModelTests.swift */; };
+		9A6054381E42410F00B87D9C /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6054371E42410F00B87D9C /* UserDefaultsManager.swift */; };
+		9A6054391E42410F00B87D9C /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6054371E42410F00B87D9C /* UserDefaultsManager.swift */; };
+		9A60543A1E42410F00B87D9C /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6054371E42410F00B87D9C /* UserDefaultsManager.swift */; };
 		9A86EAC71E3CB41200A7EBAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A86EAC61E3CB41200A7EBAC /* AppDelegate.swift */; };
 		9A86EAC91E3CB41200A7EBAC /* RecipesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A86EAC81E3CB41200A7EBAC /* RecipesListViewController.swift */; };
 		9A86EACC1E3CB41200A7EBAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A86EACA1E3CB41200A7EBAC /* Main.storyboard */; };
 		9A86EACE1E3CB41200A7EBAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A86EACD1E3CB41200A7EBAC /* Assets.xcassets */; };
 		9A86EAD11E3CB41200A7EBAC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A86EACF1E3CB41200A7EBAC /* LaunchScreen.storyboard */; };
-		9A86EADC1E3CB41200A7EBAC /* HelloFreshTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A86EADB1E3CB41200A7EBAC /* HelloFreshTests.swift */; };
 		9A86EAE71E3CB41200A7EBAC /* HelloFreshUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A86EAE61E3CB41200A7EBAC /* HelloFreshUITests.swift */; };
 		9A86EAF51E3CB48800A7EBAC /* recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 9A86EAF41E3CB48800A7EBAC /* recipes.json */; };
 		9A86EAFD1E3CB86900A7EBAC /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A86EAFC1E3CB86900A7EBAC /* Recipe.swift */; };
@@ -48,9 +53,6 @@
 		9A960C821E40A4BE009C413C /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A960C811E40A4BE009C413C /* UIViewControllerExtension.swift */; };
 		9A960C831E40A4BE009C413C /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A960C811E40A4BE009C413C /* UIViewControllerExtension.swift */; };
 		9A960C841E40A4BE009C413C /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A960C811E40A4BE009C413C /* UIViewControllerExtension.swift */; };
-		9A960C871E40ACFF009C413C /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A960C861E40ACFF009C413C /* StringExtension.swift */; };
-		9A960C881E40ACFF009C413C /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A960C861E40ACFF009C413C /* StringExtension.swift */; };
-		9A960C891E40ACFF009C413C /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A960C861E40ACFF009C413C /* StringExtension.swift */; };
 		9A960C8B1E40B886009C413C /* UnloggedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A960C8A1E40B886009C413C /* UnloggedViewController.swift */; };
 		9A960C8C1E40B886009C413C /* UnloggedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A960C8A1E40B886009C413C /* UnloggedViewController.swift */; };
 		9A960C8D1E40B886009C413C /* UnloggedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A960C8A1E40B886009C413C /* UnloggedViewController.swift */; };
@@ -102,8 +104,12 @@
 		76CF871F4DBD02F10C8EDA2C /* Pods-HelloFresh.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloFresh.release.xcconfig"; path = "Pods/Target Support Files/Pods-HelloFresh/Pods-HelloFresh.release.xcconfig"; sourceTree = "<group>"; };
 		8C76EA7FCFF1709F1E750C58 /* Pods-HelloFresh.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloFresh.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HelloFresh/Pods-HelloFresh.debug.xcconfig"; sourceTree = "<group>"; };
 		8E475DE31275904AF197AC74 /* Pods-HelloFreshUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloFreshUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HelloFreshUITests/Pods-HelloFreshUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		9A180E3B1E40F9160097F127 /* UserProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProtocol.swift; sourceTree = "<group>"; };
 		9A180E3F1E40FA5A0097F127 /* MyProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewModel.swift; sourceTree = "<group>"; };
+		9A180E431E412A1D0097F127 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9A180E471E41E8AF0097F127 /* RecipeViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeViewModelTests.swift; sourceTree = "<group>"; };
+		9A180E491E41F6DF0097F127 /* RecipeDataManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDataManagerTests.swift; sourceTree = "<group>"; };
+		9A6054341E422C2D00B87D9C /* LoginViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
+		9A6054371E42410F00B87D9C /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		9A86EAC31E3CB41200A7EBAC /* HelloFresh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloFresh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A86EAC61E3CB41200A7EBAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A86EAC81E3CB41200A7EBAC /* RecipesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesListViewController.swift; sourceTree = "<group>"; };
@@ -112,7 +118,6 @@
 		9A86EAD01E3CB41200A7EBAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9A86EAD21E3CB41200A7EBAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9A86EAD71E3CB41200A7EBAC /* HelloFreshTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HelloFreshTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9A86EADB1E3CB41200A7EBAC /* HelloFreshTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloFreshTests.swift; sourceTree = "<group>"; };
 		9A86EADD1E3CB41200A7EBAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9A86EAE21E3CB41200A7EBAC /* HelloFreshUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HelloFreshUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A86EAE61E3CB41200A7EBAC /* HelloFreshUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloFreshUITests.swift; sourceTree = "<group>"; };
@@ -131,7 +136,6 @@
 		9A960C791E3FFC6C009C413C /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		9A960C7D1E40A0AF009C413C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9A960C811E40A4BE009C413C /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
-		9A960C861E40ACFF009C413C /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		9A960C8A1E40B886009C413C /* UnloggedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnloggedViewController.swift; sourceTree = "<group>"; };
 		9A960C8E1E40B921009C413C /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		9AEBC4031E3FAAE6007B7789 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -228,14 +232,6 @@
 			name = "My Profile";
 			sourceTree = "<group>";
 		};
-		9A180E3A1E40F8FA0097F127 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				9A180E3B1E40F9160097F127 /* UserProtocol.swift */,
-			);
-			name = Protocols;
-			sourceTree = "<group>";
-		};
 		9A86EABA1E3CB41200A7EBAC = {
 			isa = PBXGroup;
 			children = (
@@ -267,8 +263,7 @@
 				9A86EAFA1E3CB82500A7EBAC /* Models */,
 				9A86EAF91E3CB81800A7EBAC /* Views */,
 				9A86EAFB1E3CB82F00A7EBAC /* ViewModels */,
-				9A86EAF61E3CB7C300A7EBAC /* Data Manager */,
-				9A180E3A1E40F8FA0097F127 /* Protocols */,
+				9A86EAF61E3CB7C300A7EBAC /* Data Managers */,
 				9AEBC4021E3FAACD007B7789 /* Utilities */,
 				9A960C851E40A4D7009C413C /* Extensions */,
 				9A86EAF81E3CB7FA00A7EBAC /* Supporting Files */,
@@ -279,8 +274,10 @@
 		9A86EADA1E3CB41200A7EBAC /* HelloFreshTests */ = {
 			isa = PBXGroup;
 			children = (
-				9A86EADB1E3CB41200A7EBAC /* HelloFreshTests.swift */,
 				9A86EADD1E3CB41200A7EBAC /* Info.plist */,
+				9A180E471E41E8AF0097F127 /* RecipeViewModelTests.swift */,
+				9A6054341E422C2D00B87D9C /* LoginViewModelTests.swift */,
+				9A180E491E41F6DF0097F127 /* RecipeDataManagerTests.swift */,
 			);
 			path = HelloFreshTests;
 			sourceTree = "<group>";
@@ -294,13 +291,14 @@
 			path = HelloFreshUITests;
 			sourceTree = "<group>";
 		};
-		9A86EAF61E3CB7C300A7EBAC /* Data Manager */ = {
+		9A86EAF61E3CB7C300A7EBAC /* Data Managers */ = {
 			isa = PBXGroup;
 			children = (
 				9A86EB001E3CBBC300A7EBAC /* RecipeDataManager.swift */,
 				9A86EB021E3CCE0600A7EBAC /* UserDataManager.swift */,
+				9A6054371E42410F00B87D9C /* UserDefaultsManager.swift */,
 			);
-			name = "Data Manager";
+			name = "Data Managers";
 			sourceTree = "<group>";
 		};
 		9A86EAF71E3CB7EB00A7EBAC /* Storyboards */ = {
@@ -357,7 +355,6 @@
 			children = (
 				9A960C791E3FFC6C009C413C /* UIImageViewExtension.swift */,
 				9A960C811E40A4BE009C413C /* UIViewControllerExtension.swift */,
-				9A960C861E40ACFF009C413C /* StringExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -366,6 +363,7 @@
 			isa = PBXGroup;
 			children = (
 				9AEBC4031E3FAAE6007B7789 /* Utils.swift */,
+				9A180E431E412A1D0097F127 /* Constants.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -661,6 +659,7 @@
 				9A86EB071E3CE33700A7EBAC /* LoginViewModel.swift in Sources */,
 				9A86EB0B1E3E3E8D00A7EBAC /* RecipesListViewModel.swift in Sources */,
 				9A960C821E40A4BE009C413C /* UIViewControllerExtension.swift in Sources */,
+				9A180E441E412A1D0097F127 /* Constants.swift in Sources */,
 				9A86EB091E3E3BE500A7EBAC /* RecipesTableViewCell.swift in Sources */,
 				9A960C7A1E3FFC6C009C413C /* UIImageViewExtension.swift in Sources */,
 				9AEBC4041E3FAAE6007B7789 /* Utils.swift in Sources */,
@@ -668,15 +667,14 @@
 				9A86EB111E3E611D00A7EBAC /* OverviewTableViewController.swift in Sources */,
 				9A86EB031E3CCE0600A7EBAC /* UserDataManager.swift in Sources */,
 				9A180E401E40FA5A0097F127 /* MyProfileViewModel.swift in Sources */,
+				9A6054381E42410F00B87D9C /* UserDefaultsManager.swift in Sources */,
 				9A86EB051E3CE30C00A7EBAC /* RecipeViewModel.swift in Sources */,
 				9A86EAFD1E3CB86900A7EBAC /* Recipe.swift in Sources */,
 				9A960C7E1E40A0AF009C413C /* LoginViewController.swift in Sources */,
 				9A960C8B1E40B886009C413C /* UnloggedViewController.swift in Sources */,
-				9A960C871E40ACFF009C413C /* StringExtension.swift in Sources */,
 				9A86EAC91E3CB41200A7EBAC /* RecipesListViewController.swift in Sources */,
 				9A86EAC71E3CB41200A7EBAC /* AppDelegate.swift in Sources */,
 				9AEBC4081E3FB108007B7789 /* RatingViewController.swift in Sources */,
-				9A180E3C1E40F9160097F127 /* UserProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -684,18 +682,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A180E481E41E8AF0097F127 /* RecipeViewModelTests.swift in Sources */,
 				9AD6A6891E3EA0280024950D /* RecipeViewModel.swift in Sources */,
 				9A960C771E3FB9F7009C413C /* RatingViewController.swift in Sources */,
 				9A180E411E40FB410097F127 /* MyProfileViewModel.swift in Sources */,
+				9A180E4A1E41F6DF0097F127 /* RecipeDataManagerTests.swift in Sources */,
 				9A960C921E40C61F009C413C /* UserDataManager.swift in Sources */,
-				9A960C881E40ACFF009C413C /* StringExtension.swift in Sources */,
 				9A960C7B1E3FFC6C009C413C /* UIImageViewExtension.swift in Sources */,
 				9AEBC3FC1E3F87CC007B7789 /* RecipeDataManager.swift in Sources */,
-				9A180E3D1E40FA110097F127 /* UserProtocol.swift in Sources */,
 				9A86EB121E3E611D00A7EBAC /* OverviewTableViewController.swift in Sources */,
-				9A86EADC1E3CB41200A7EBAC /* HelloFreshTests.swift in Sources */,
 				9A960C901E40B921009C413C /* ProfileViewController.swift in Sources */,
+				9A180E451E412D1D0097F127 /* Constants.swift in Sources */,
 				9AD6A68B1E3EA02C0024950D /* LoginViewModel.swift in Sources */,
+				9A6054391E42410F00B87D9C /* UserDefaultsManager.swift in Sources */,
+				9A6054351E422C2D00B87D9C /* LoginViewModelTests.swift in Sources */,
 				9AEBC4051E3FAAEA007B7789 /* Utils.swift in Sources */,
 				9AEBC4001E3F87DC007B7789 /* User.swift in Sources */,
 				9AD6A68D1E3EA0300024950D /* RecipesListViewModel.swift in Sources */,
@@ -715,13 +715,13 @@
 				9A960C781E3FB9F8009C413C /* RatingViewController.swift in Sources */,
 				9A180E421E40FB410097F127 /* MyProfileViewModel.swift in Sources */,
 				9A960C931E40C61F009C413C /* UserDataManager.swift in Sources */,
-				9A960C891E40ACFF009C413C /* StringExtension.swift in Sources */,
+				9A60543A1E42410F00B87D9C /* UserDefaultsManager.swift in Sources */,
 				9A960C7C1E3FFC6C009C413C /* UIImageViewExtension.swift in Sources */,
 				9AEBC3FD1E3F87CC007B7789 /* RecipeDataManager.swift in Sources */,
-				9A180E3E1E40FA120097F127 /* UserProtocol.swift in Sources */,
 				9A86EB131E3E611D00A7EBAC /* OverviewTableViewController.swift in Sources */,
 				9A86EAE71E3CB41200A7EBAC /* HelloFreshUITests.swift in Sources */,
 				9A960C911E40B921009C413C /* ProfileViewController.swift in Sources */,
+				9A180E461E412D1E0097F127 /* Constants.swift in Sources */,
 				9AD6A68C1E3EA02C0024950D /* LoginViewModel.swift in Sources */,
 				9AEBC4061E3FAAEA007B7789 /* Utils.swift in Sources */,
 				9AEBC4011E3F87DD007B7789 /* User.swift in Sources */,
@@ -793,6 +793,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -843,6 +844,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -867,6 +869,7 @@
 			baseConfigurationReference = 8C76EA7FCFF1709F1E750C58 /* Pods-HelloFresh.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = A5KJ3Z3G6S;
 				INFOPLIST_FILE = HelloFresh/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -881,6 +884,7 @@
 			baseConfigurationReference = 76CF871F4DBD02F10C8EDA2C /* Pods-HelloFresh.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = A5KJ3Z3G6S;
 				INFOPLIST_FILE = HelloFresh/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

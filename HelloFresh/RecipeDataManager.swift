@@ -10,7 +10,7 @@ import Foundation
 
 public class RecipeDataManager {
     
-    static func retrieveRecipes() -> [Recipe] {
+    func retrieveRecipes() -> [Recipe] {
         
         var recipes = [Recipe]()
         
@@ -57,20 +57,38 @@ public class RecipeDataManager {
         return recipes
     }
     
-    static func loveRecipe(recipeId: String, userId: String, value: Bool, completion: (Bool?) -> Void) {
-        completion(true)
+    // Save user (:userId) love (:yer or no) about the recipe (:recipeId)
+    // Return the saved user love or nil and error message
+    func loveRecipe(recipeId: String, userId: String, value: Bool, completion: (_ love: Bool?, _ error: String?) -> Void) {
+        if Constants.loveRecipeWillFail { completion(nil, "Error loving the recipe") }
+        else { completion(value, nil) }
     }
     
-    static func rateRecipe(recipeId: String, value: Int, userId: String, completion: (Int?) -> Void) {
-        completion(2)
+    // Save the recipe rating issued by the user
+    // Return the saved rating or nil and error message
+    func rateRecipe(recipeId: String, value: Int, userId: String, completion: ( _ rating: Int?, _ error: String?) -> Void) {
+        if Constants.rateRecipeWillFail { completion(nil, "Error rating the recipe") }
+        else { completion(value, nil) }
     }
     
-    static func recipeIsLoved(recipeId: String, byUser userId: String, completion: (Bool?) -> Void) {
-        completion(Utils.randomBool())
+    // Check if the user loves the recipe
+    // Return the user love or nil and error message
+    func recipeIsLoved(recipeId: String, byUser userId: String, completion: (_ love: Bool?, _ error: String?) -> Void) {
+        if Constants.retrieveUserLoveWillFail { completion(nil, "Error retrieving user love") }
+        else {
+            let initialUserLove = Constants.wasThereUserLove ? Utils.randomBool() : nil
+            completion(initialUserLove, nil)
+        }
     }
     
-    static func retrieveRate(ofUser userId: String, forRecipe recipeId: String, completion: (Int?) -> Void) {
-        completion(0)
+    // Check if the user has already rate the recipe
+    // Return user rating or nil and error message
+    func retrieveRate(ofUser userId: String, forRecipe recipeId: String, completion: (_ rating: Int?, _ error: String?) -> Void) {
+        if Constants.retrieveUserRatingWillFail { completion(nil, "Error retrieving user rating") }
+        else {
+            let initialUserRating = Constants.wasThereUserRating ? Utils.randomBetwwen(lower: 0, upper: 4) : nil
+            completion(initialUserRating, nil)
+        }
     }
     
 }

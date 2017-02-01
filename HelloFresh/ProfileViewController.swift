@@ -10,10 +10,13 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    // Variables
     var myProfileViewModel = MyProfileViewModel()
     
+    // Outlets
     @IBOutlet weak var unloggedViewContainer: UIView!
     
+    // Life cycles methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,7 +30,7 @@ class ProfileViewController: UIViewController {
         }
         
         // Check if user is logged -> If no show the unlogged view
-        if !myProfileViewModel.isUserLogged() {
+        if !myProfileViewModel.defaultsManager.isUserLogged() {
             showUnloggedView()
         }
     }
@@ -50,12 +53,18 @@ class ProfileViewController: UIViewController {
 
 }
 
+
+// MARK: - Unlogged delegate
+
 extension ProfileViewController: UnloggedDelegate {
     
     func goToLoginViewController() {
         self.performSegue(withIdentifier: "fromMyProfileToLogin", sender: nil)
     }
 }
+
+
+// MARK: - Login delegate
 
 extension ProfileViewController: LoginDelegate {
     

@@ -13,5 +13,9 @@ class Utils {
     static func randomBool() -> Bool {
         return arc4random_uniform(2) == 0
     }
+    
+    static func randomBetwwen(lower: UInt32, upper: UInt32) -> Int {
+        return Int(arc4random_uniform(upper - lower) + lower)
+    }
 
 }

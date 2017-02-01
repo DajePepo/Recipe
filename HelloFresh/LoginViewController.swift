@@ -14,6 +14,7 @@ protocol LoginDelegate {
 
 class LoginViewController: UIViewController {
     
+    // Variables
     var loginViewModel = LoginViewModel()
     var delegate: LoginDelegate?
     
@@ -44,12 +45,13 @@ class LoginViewController: UIViewController {
     @IBAction func didClickOnLoginButton(_ sender: Any) {
         loginViewModel.loginUser { logged in
             if logged {
-                delegate?.userLoggedSuccessfully()
-                self.dismiss(animated: true, completion: nil)
-                return
+                showMessage(message: "Welcome.\nLogged in successfully.") { [unowned self] _ in
+                    self.delegate?.userLoggedSuccessfully()
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
             else {
-                // show message error
+                showMessage(message: "There was an error.\nPlease try again.", completionHandler: nil)
             }
         }
     }
@@ -76,6 +78,8 @@ class LoginViewController: UIViewController {
 
 }
 
+
+// MARK: - Text field delegate
 
 extension LoginViewController: UITextFieldDelegate {
     

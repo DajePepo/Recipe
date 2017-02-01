@@ -29,7 +29,7 @@ class OverviewTableViewController: UITableViewController {
     @IBOutlet weak var ratingButtonsContainer: UIView!
     @IBOutlet weak var loveButton: UIButton!
     
-    
+    // Configure method -> it's called as first to initialize the table view controller
     func configure(viewModel: RecipeViewModel) {
         
         // Set model view
@@ -66,19 +66,21 @@ class OverviewTableViewController: UITableViewController {
         addObserver(self, forKeyPath: #keyPath(tableViewModel.isLoved), options: .new, context: nil)
     }
     
-    
     // Love action
     @IBAction func didClickOnLoveButton(_ sender: Any) {
         
         // If the user is not logged -> show login form
-        if let viewModel = tableViewModel, !viewModel.isUserLogged() {
+        if let viewModel = tableViewModel, !viewModel.defaultsManager.isUserLogged() {
             delegate?.showLoginView()
             return
         }
         
-        tableViewModel?.loveRecipe(newValue: !loveButton.isSelected)
+        tableViewModel?.loveRecipe(newValue: !loveButton.isSelected, fail: { [unowned self] _ in
+            
+            // If the action failed
+            self.showMessage(message: "There was an error.\nPlease try again.", completionHandler: nil)
+        })
     }
-    
     
     // Override the observer to complete the binding
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {

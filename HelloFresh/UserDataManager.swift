@@ -9,12 +9,11 @@
 import Foundation
 
 public class UserDataManager {
-
-    static func logIn(userEmail: String, userPassword: String, completion: (String?) -> Void) {
-        completion("userId")
-    }
     
-    static func signUp(userEmail: String, userPassword: String, succes: (String) -> Void, fail: () -> Void) {
-        
-    }    
+    // Log the user in
+    // Return the user id or nil and error message
+    func logIn(userEmail: String, userPassword: String, completion: (_ userId: String?, _ error: String?) -> Void) {
+        if Constants.logInWillFail { completion(nil, "Error logging the user") }
+        else { completion("ID_000", nil) }
+    }
 }

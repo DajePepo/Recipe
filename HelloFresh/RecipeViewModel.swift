@@ -8,8 +8,9 @@
 
 import Foundation
 
-class RecipeViewModel: NSObject, UserProtocol {
+class RecipeViewModel: NSObject {
     
+    // Variables
     var id: String
     var name: String
     var headLine: String
@@ -19,14 +20,13 @@ class RecipeViewModel: NSObject, UserProtocol {
     var difficulty: String
     var time: String
     var rating: String?
-    
     var userRatingNotUpdated = true
     dynamic var userRating: Int = 0
     dynamic var ratingConfirmationMessage: String = ""
-    
     var isLoveNotUpdated = true
     dynamic var isLoved: Bool = false
-    
+    var recipeDataManager = RecipeDataManager()
+    var defaultsManager = UserDefaultsManager()
 
     // Initialize the view model through the model
     init(recipe: Recipe) {
@@ -48,50 +48,59 @@ class RecipeViewModel: NSObject, UserProtocol {
         }()
     }
     
-    
     // Check if user loves the recipe
-    func retriveUserLove() {
-        if isLoveNotUpdated, let userId = getLoggedUserId() {
-            RecipeDataManager.recipeIsLoved(recipeId: id, byUser: userId) { result in
+    func retriveUserLove(completion: (() -> Void)? = nil) {
+        if isLoveNotUpdated, let userId = defaultsManager.getLoggedUserId() {
+            recipeDataManager.recipeIsLoved(recipeId: id, byUser: userId) { (result, error) in
                 isLoved = result ?? false
                 isLoveNotUpdated = (result != nil) ? false : true
+                completion?()
             }
         }
+        else { completion?() }
     }
     
     // Rate the recipe
-    func loveRecipe(newValue: Bool) {
-        if let userId = getLoggedUserId() {
-            RecipeDataManager.loveRecipe(recipeId: id, userId: userId, value: newValue) { result in
-                if result != nil { isLoved = newValue }
+    func loveRecipe(newValue: Bool, success: (() -> Void)? = nil, fail: (() -> Void)? = nil) {
+        if let userId = defaultsManager.getLoggedUserId() {
+            recipeDataManager.loveRecipe(recipeId: id, userId: userId, value: newValue) { (result, error) in
+                if result != nil {
+                    isLoved = newValue
+                    success?()
+                }
+                else { fail?() }
             }
         }
+        else { fail?() }
     }
 
-
     // Retrieve initial user value
-    func retriveUserRating() {
-        if userRatingNotUpdated, let userId = getLoggedUserId() {
-            RecipeDataManager.retrieveRate(ofUser: userId, forRecipe: id) { result in
+    func retriveUserRating(completion: (() -> Void)? = nil) {
+        if userRatingNotUpdated, let userId = defaultsManager.getLoggedUserId() {
+            recipeDataManager.retrieveRate(ofUser: userId, forRecipe: id) { (result, error) in
                 if let rating = result {
                     userRating = rating
                     ratingConfirmationMessage = "You have already rated this recipe"
                     userRatingNotUpdated = false
                 }
+                completion?()
             }
         }
+        else { completion?() }
     }
     
     // Rate the recipe
-    func rateRecipe(newValue: Int) {
-        if let userId = getLoggedUserId() {
-            RecipeDataManager.rateRecipe(recipeId: id, value: newValue, userId: userId) { result in
+    func rateRecipe(newValue: Int, success: (() -> Void)? = nil, fail: (() -> Void)? = nil) {
+        if let userId = defaultsManager.getLoggedUserId() {
+            recipeDataManager.rateRecipe(recipeId: id, value: newValue, userId: userId) { (result, error) in
                 if let rating = result {
                     userRating = rating
                     ratingConfirmationMessage = "Thanks for your feedback"
+                    success?()
                 }
+                else { fail?() }
             }
         }
+        else { fail?() }
     }
-    
 }

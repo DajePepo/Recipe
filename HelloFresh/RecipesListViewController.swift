@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RecipesListViewController: UIViewController {
+open class RecipesListViewController: UIViewController {
     
     // Variables
     var recipesListViewModel = RecipesListViewModel()
@@ -21,8 +21,8 @@ class RecipesListViewController: UIViewController {
     // Outlets
     @IBOutlet weak var recipesTableView: UITableView!
     
-    // File cycle methods
-    override func viewDidLoad() {
+    // Life cycle methods
+    override open func viewDidLoad() {
         super.viewDidLoad()
      
         // Set dynamic cell size to recipes table
@@ -37,7 +37,7 @@ class RecipesListViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override open func viewWillAppear(_ animated: Bool) {
         recipesTableView.reloadData()
     }
     
@@ -49,7 +49,7 @@ class RecipesListViewController: UIViewController {
     }
 
     // Routing
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override open func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let overviewVC = segue.destination as? OverviewViewController {
             
@@ -65,7 +65,7 @@ class RecipesListViewController: UIViewController {
 
 extension RecipesListViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "fromRecipesToOverview", sender: nil)
     }
 }
@@ -75,11 +75,11 @@ extension RecipesListViewController: UITableViewDelegate {
 
 extension RecipesListViewController: UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recipesListViewModel.recipesCount
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecipesTableViewCell", for: indexPath) as? RecipesTableViewCell
         guard let recipeCell = cell else { return UITableViewCell() }
@@ -99,6 +99,10 @@ extension RecipesListViewController: RecipesTableCellDelegate {
         if let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
             present(loginViewController, animated: true, completion: nil)
         }
+    }
+    
+    func showErrorMessage(message: String) {
+        showMessage(message: "There was an error.\nPlease try again.", completionHandler: nil)
     }
 }
 

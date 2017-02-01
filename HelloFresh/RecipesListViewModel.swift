@@ -8,6 +8,8 @@
 
 class RecipesListViewModel {
     
+    // Variables
+    var recipeDataManager = RecipeDataManager()
     fileprivate var recipeViewModelList = [RecipeViewModel]()
     
     // Return number of recipes in the list
@@ -22,7 +24,7 @@ class RecipesListViewModel {
     
     // Load recipes list through the data manager
     func retrieveRecipes() {
-        let recipes = RecipeDataManager.retrieveRecipes()
+        let recipes = recipeDataManager.retrieveRecipes()
         self.recipeViewModelList = recipes.map(){ RecipeViewModel(recipe: $0) }
     }
 

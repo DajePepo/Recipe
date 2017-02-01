@@ -19,4 +19,10 @@ extension UIViewController {
         view.endEditing(true)
     }
     
+    func showMessage(message: String!, title: String = "Message", completionHandler: ((UIAlertAction) -> Void)?) -> Void {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: completionHandler))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 }
