@@ -275,9 +275,9 @@
 			isa = PBXGroup;
 			children = (
 				9A86EADD1E3CB41200A7EBAC /* Info.plist */,
-				9A180E471E41E8AF0097F127 /* RecipeViewModelTests.swift */,
-				9A6054341E422C2D00B87D9C /* LoginViewModelTests.swift */,
 				9A180E491E41F6DF0097F127 /* RecipeDataManagerTests.swift */,
+				9A6054341E422C2D00B87D9C /* LoginViewModelTests.swift */,
+				9A180E471E41E8AF0097F127 /* RecipeViewModelTests.swift */,
 			);
 			path = HelloFreshTests;
 			sourceTree = "<group>";

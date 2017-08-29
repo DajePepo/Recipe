@@ -15,10 +15,10 @@ extension UIImageView {
         URLSession.shared.dataTask(with: url) { [unowned self] (data, response, error) in
             guard   let httpURLResponse = response as? HTTPURLResponse,
                     httpURLResponse.statusCode == 200,
+                    error == nil,
                     let mimeType = response?.mimeType,
                     mimeType.hasPrefix("image"),
                     let data = data,
-                    error == nil,
                     let image = UIImage(data: data)
                     else { return }
             DispatchQueue.main.async() { self.image = image }

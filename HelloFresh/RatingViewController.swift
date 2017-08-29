@@ -21,17 +21,17 @@ class RatingViewController: UIViewController {
     @IBOutlet weak var buttonsPanel: UIStackView! // Buttons panel
     @IBOutlet weak var removeUserRating: UIButton!
     
-    // Configure method -> it's called as first to initialize the view controller
-    func configure(viewModel: RecipeViewModel?) {
-        ratingViewModel = viewModel
-        ratingViewModel?.retriveUserRating()
-    }
-    
     // View model
     var ratingViewModel: RecipeViewModel? {
         didSet {
             bindViewModel()
         }
+    }
+
+    // Configure method -> it's called as first to initialize the view controller
+    func configure(viewModel: RecipeViewModel?) {
+        ratingViewModel = viewModel
+        ratingViewModel?.retriveUserRating()
     }
     
     // Bind view model
